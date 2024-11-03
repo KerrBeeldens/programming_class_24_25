@@ -343,3 +343,4 @@ out
 .ionide
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,latex,processing
+report/Template.tex

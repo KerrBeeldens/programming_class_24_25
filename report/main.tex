@@ -1,0 +1,42 @@
+\documentclass[10pt, noindent, a4paper]{richreport}
+\input{preamble.tex} % Loads in the preamble
+
+\begin{document}
+
+\maketitle
+
+% TODO: remove
+{\hypersetup{linkcolor=black}
+    \tableofcontents
+    \pagenumbering{gobble}}
+\newpage
+\pagenumbering{arabic}
+
+% Add chapters here
+\input{Chapters/abstract.tex}
+\newpage
+\input{Chapters/day_1.tex}
+\newpage
+\input{Chapters/day_2.tex}
+\newpage
+\input{Chapters/day_3.tex}
+\newpage
+\input{Chapters/day_4.tex}
+\newpage
+\input{Chapters/day_5.tex}
+\newpage
+\input{Chapters/reflection.tex}
+
+% Creates references in APA style, with black links, using the Biblatex 
+% \addbibresource{References.bib} % Loads in the References.bib file
+% {\hypersetup{urlcolor=black}\printbibliography[heading=bibintoc, heading=bibnumbered]}
+\newpage
+
+\begin{appendices} % Any section after this command will have a letter as an index
+
+    % \input{Chapters/Appendix_A.tex}
+    % \newpage
+
+\end{appendices}
+
+\end{document}
