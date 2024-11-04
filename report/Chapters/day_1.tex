@@ -2,11 +2,50 @@
 
 \section{Summary of topics}
 % Summarize the topics from the “listen” segment of the day (150 – 250 words)
+During this lecture the layout of the PDE was explained. A basic program to draw a line was shown. Here, it was showed that one can draw basic shapes in processing using a variety of functions. These functions have a number of parameters. These are things like numbers, strings or booleans that change the behavior of the function. Examples are:
+
+\begin{codebox}{Example 1}
+    \begin{lstlisting}
+println("Hello"); // print "Hello" in the console
+size(400, 400); // set the screen size to 400 by 400 pixels
+point(50, 90); // draw a point at x = 50, y = 90
+    \end{lstlisting}
+\end{codebox}
+
+It was also explained that by using two slashes, you can create comments, which help explain code to others (like I did above). Furthermore, the coordinate system of the screen (going from left to right and from above to below) and the drawing order was shown. Colors of objects can be changed, by using:
+
+\begin{codebox}{Example 2}
+    \begin{lstlisting}
+fill(255, 0, 0); // set the fill color to red
+background(0, 255, 0); // set the background to green
+stroke(0, 0, 255, 127); // set the stroke color to translucent blue
+    \end{lstlisting}
+\end{codebox}
+
+The 4 parameters representing the R, G, B and Alpha values.
+
+Next, variables where explained. These are small pieces of data that can represent numbers, letters, words, colors booleans etc. They are created using a type specifier like \texttt{int} or \texttt{boolean} followed by a name. Naming variables is done using camelCase. One can then use this name to assign data to the variable and then use the variable like:
+
+\begin{codebox}{Example 3}
+    \begin{lstlisting}
+int a = 20; // declare a variable a and assign 20 to it
+point(a, a); // use a to place a point at 20, 20
+    \end{lstlisting}
+\end{codebox}
+
+Processing also has build-in variables, like \texttt{width} and \texttt{height}.
+
+Then, some basic mathematics where shown. You can add values or variables together using ``+'', subtract them using ``-'', multiply using ``*'' and divide using ``/''. It is important to keep track of the data types when doing this. It is also possible to change the datatype. For example, changing a value to an integer is possible using \texttt{int().}
+
+Finally the \texttt{random()} function was explained. It returns a float between 0 and the given number or when two numbers are given, between the two numbers, like this:
+
+\begin{codebox}{Example 4}
+    \begin{lstlisting}
+float randomNumber = random(20); // return a random float from 0-20
+int randomNumber = int(random(5, 20)); // return a random int from 5-19
+    \end{lstlisting}
+\end{codebox}
 
 \section{Challenge description: \textcolor{red}{name}}
 % A description of that day’s challenge describing what the assignment was, what you tried to achieve and how you applied the topics from the “listen” segment. include instruction on how to use is and Include screenshots/screen captures. (150 – 250 words)
-
-\begin{codebox}{code 1}
-    \lstinputlisting{../test/test.pde}
-\end{codebox}
     
