@@ -1,27 +1,28 @@
 void setup() {
   // Initialize the window
-  size(1920, 1080);
+  size(700, 1000);
   background(255);
   noStroke();
-  fill(int(random(0, 256)), int(random(0, 256)), int(random(0, 256)));
+  
+  // Pick a random draw color
+  fill(int(random(0, 127)), int(random(0, 127)), int(random(0, 127)));
   
   // Initialize the images
   PImage[] images = new PImage[7];
-  
-  images[0] = loadImage("resources/gradient.png");
-  images[1] = loadImage("resources/lenna_128px.png");
-  images[2] = loadImage("resources/gradient.png");
-  images[3] = loadImage("resources/self_portrait.png");
-  images[4] = loadImage("resources/stary_night.png");
-  images[5] = loadImage("resources/the_potato_eaters.png");
-  images[6] = loadImage("resources/wheat_field_with_cypresses.png");
+  images[0] = loadImage("resources/van_gogh.jpg");
+  images[1] = loadImage("resources/picasso.jpg");
+  images[2] = loadImage("resources/mona_lisa.jpg");
+  images[3] = loadImage("resources/the_scream.jpg");
+  images[4] = loadImage("resources/napoleon.jpg");
+  images[5] = loadImage("resources/girl_with_a_pearl.jpg");
+  images[6] = loadImage("resources/rebrandt.jpg");
   
   // Pick a random image
   int randomPick = int(random(0, 7));
   PImage image = images[randomPick];
  
   // Resize the image and load in the pixels
-  float imageScale = 0.1;
+  float imageScale = 0.2;
   
   image.resize(int(image.width * imageScale), int(image.height * imageScale));
   image.loadPixels();
