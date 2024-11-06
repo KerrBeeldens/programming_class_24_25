@@ -3,5 +3,55 @@
 \section{Summary of topics}
 % Summarize the topics from the “listen” segment of the day (150 – 250 words)
 
+In the lesson of today we continued with conditionals. The \texttt{else} keyword was again explained, after which we also learned about the \texttt{else if} keyword. Expanding upon example 2.3 from yesterday we get:
+
+\begin{codebox}{example 3.1}
+    \begin{lstlisting}
+if (relational expression 1) {
+    // lines to be executed if expression 1 is true
+} else if (relation expression 2) {
+    // lines to be executed if expression 2 is true
+} else {
+    // lines to be executed if both expression 1 and 2 are false
+}
+    \end{lstlisting}
+\end{codebox}
+
+Next, logical operators where demonstrated. These allow you to combine multiple relational expression together into a single relational expression. These are as follows:
+
+\begin{codebox}{example 3.2}
+    \begin{lstlisting}
+expr 1 && expr 2 // Expr 1 and 2 need to be true to return true
+expr 1 || expr 2 // Expr 1 and/or 2 need to be true to return true
+!expr 1 // Expr 1 needs to be false to return true and vice versa
+    \end{lstlisting}
+\end{codebox}
+
+The next topic was about user interaction. First the variables \texttt{mouseX} and \texttt{mouseY} of yesterday were explained again. Next, two methods to detect mouse button presses and key presses where demonstrated. The first method uses the \texttt{keyPressed} and \texttt{mousePressed} variables. If a key or mouse button is pressed, the respective variable returns \texttt{true}. Then, with the variables \texttt{key} and \texttt{mouseButton}, you can read out which key or button was pressed. See the code examples below.
+
+\begin{codebox}{example 3.3}
+    \begin{lstlisting}
+if (keyPressed) { // check if a key was pressed
+    if (key == 'w') {
+        // this code is executed when the 'w' key is pressed
+    } 
+}
+    \end{lstlisting}
+\end{codebox}
+
+\newpage
+
+\begin{codebox}{example 3.4}
+    \begin{lstlisting}
+if (mousePressed) { // check if a mouse button was pressed
+    if (mouseButton == LEFT) {
+        // this code is executed when the left mouse button is pressed
+    } 
+}
+    \end{lstlisting}
+\end{codebox}
+
+The disadvantage of this first method is that the program is not interrupted when the user presses a key. If the main loop of the program takes a long time, a key press might be missed. The second method uses events, which interrupt the program if the conditions for that event are met (like pressing a button). A event triggers a method which is then executed once. Examples of mouse Events are \texttt{mousePressed()}, \texttt{mouseReleased()} and \texttt{mouseMoved()}. Examples of key events are \texttt{keyPressed()} and \texttt{keyReleased()}. In all these methods you can use the variables \texttt{key} and \texttt{mouseButton} similarly to example 3.3 and 3.4 to detect which key or button was pressed.
+
 \section{Challenge description: \textcolor{red}{name}}
 % A description of that day’s challenge describing what the assignment was, what you tried to achieve and how you applied the topics from the “listen” segment. include instruction on how to use is and Include screenshots/screen captures. (150 – 250 words)
