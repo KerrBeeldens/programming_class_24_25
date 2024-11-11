@@ -3,5 +3,53 @@
 \section{Summary of topics}
 % Summarize the topics from the “listen” segment of the day (150 – 250 words)
 
+The topic of today were arrays. Arrays store a set of data elements under the same name. They can store all sorts of data types, but only one at the same time. They are especially useful for storing related data together, so you don't need to create lots of separate variables. There are a few different ways to create an array
+
+\begin{codebox}{Example 5.1}
+    \begin{lstlisting}
+int[] data; // declare
+data = new int[5]; // initialize 
+data[0] = 10; // assign
+
+int[] data = new int[5]; // declare, initialize
+data[0] = 0; // assign
+
+int[] data = {10, 5, 7, 12, 20}; // initialize, declare, assign
+    \end{lstlisting}
+\end{codebox}
+
+You create an array using the datatype followed by square brackets and the variable name. Then, you can either use \texttt{new datatype[n]} to create an array of size \texttt{n} or use curly brackets followed by a number of variables separated by commas to immediately fill the array.
+
+You can read a write data from the array by typing its name followed by square brackets. Inside these brackets you type the index of the value you want to get. The index is the position of the data in the array, starting at 0 for the first elements. You can write to an array by using the same method as before, together with the assign operator and the (new) value you want in the array. See example 5.2
+
+\begin{codebox}{Example 5.2}
+    \begin{lstlisting}
+int[] data = {10, 5, 7, 12, 20};
+
+data[3] // this will give the fourth value, 12
+data[0] = 15; // set the first value (10) to 15
+    \end{lstlisting}
+\end{codebox}
+
+important to note that if the index is not in the array (like -1 or in the example, 5), you get an error.
+
+\newpage
+
+The final topic was how you can use arrays in loops. Example 5.3 was shown during the lesson.
+
+\begin{codebox}{Example 5.2}
+    \begin{lstlisting}
+float[] grades = {6, 6.5, 9, 8.5, 5};
+float total = 0;
+
+for(int i = 0; i < grades.length; i++){
+    total += grades[i];
+} 
+println(total/grades.length);
+    \end{lstlisting}
+\end{codebox}
+
+This code creates an array of grades and a variable \texttt{total} that will be used to store the sum of the grades. In a for loop the variable \texttt{i} starts at 0 and increases every iteration by 1. \texttt{grades.length} gets the length of the array, so the loop stops at the end of the array. Inside the loop, each value of the array is added to the \texttt{total} variable, which results in this variable being equal to the sum of the values in \texttt{grades}. Outside of the loop the average of the grades is printed. 
+
 \section{Challenge description: \textcolor{red}{name}}
 % A description of that day’s challenge describing what the assignment was, what you tried to achieve and how you applied the topics from the “listen” segment. include instruction on how to use is and Include screenshots/screen captures. (150 – 250 words)
