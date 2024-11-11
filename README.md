@@ -3,10 +3,11 @@ This repository contains the source code for the assignments I created during th
 It contains the following folders:
 
 - The source code of the 5 assignments, separated into folders:
-    - assignment 1:
-    - assignment 2: 
-    - assignment 3:
-    - assignment 4:
-    - assignment 5:
+    - assignment 1: Half-tone
+    - assignment 2: Animation
+    - assignment 3: Game
+    - assignment 4: Etch-a-sketch
+    - assignment 5: Tetris
 - The source code of the accompanying report (LaTeX). **N.B.** This document will not compile as it requires a custom LaTeX package and document class.
+- A folder with videos briefly explaining each of the programs and show their features.
 - The compiled report (PDF).
