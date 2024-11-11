@@ -51,5 +51,50 @@ println(total/grades.length);
 
 This code creates an array of grades and a variable \texttt{total} that will be used to store the sum of the grades. In a for loop the variable \texttt{i} starts at 0 and increases every iteration by 1. \texttt{grades.length} gets the length of the array, so the loop stops at the end of the array. Inside the loop, each value of the array is added to the \texttt{total} variable, which results in this variable being equal to the sum of the values in \texttt{grades}. Outside of the loop the average of the grades is printed. 
 
-\section{Challenge description: \textcolor{red}{name}}
+\section{Challenge description: Tetris}
 % A description of that day’s challenge describing what the assignment was, what you tried to achieve and how you applied the topics from the “listen” segment. include instruction on how to use is and Include screenshots/screen captures. (150 – 250 words)
+
+My intention for this final challenge was to create the classic game Tetris, for this I wanted to recreate in faithfully to the classic GameBoy version of the game. Just like the original, I wanted the game to randomly give the player one of the seven Tetris blocks, which slowly starts moving down the screen. The player can move the block left and right, and also rotate the block or move it down more quickly. Once the block is placed and a full row is created, the row should be removed and all the rows should shift down. Finally, the game should award points to the player and give the player a new random block. If this proved to be easy, I also wanted to recreate the look of the game, add the possibility to save a highscore and add a simple menu to the game. The original version is shown in \cref{fig: tetris gb}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width = 0.5 \textwidth]{Figures/day_5/gb_tetris.png}
+    \caption{The original Tetris for the GameBoy}
+    \label{fig: tetris gb}
+\end{figure}
+
+In \cref{fig: tetris}. It is shown how a typical game is played. When launching the game a start screen is shown with the current highscore. You can press the enter-key to start the game (\cref{fig: new game}). The game is played using the arrow keys, where the left and right keys move the block left and right. Pressing and holding the down key moves the block down more quickly. The up key rotates the pieces (\cref{fig: game}). The goal is to create a full line of blocks after which that row is removed from the playing field. The number of points scored are based on the current level and the number of lines cleared at the same time. Every 5 cleared lines the level is increased to a maximum of 12. The speed of the game will increase each level. One can pause and unpause the game at any moment by pressing the enter key (\cref{fig: paused game}). The game is over when a new block cannot be created. The score and highscore are shown and one can press the enter key again to go back to the main menu (\cref{fig: game over}). 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/day_5/new_game.png}
+        \caption{Starting a new game}
+        \label{fig: new game}
+    \end{subfigure}
+    \hspace{1cm}
+    \begin{subfigure}[b]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/day_5/game.png}
+        \caption{Playing te game}
+        \label{fig: game}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/day_5/game_paused.png}
+        \caption{Pausing the game}
+        \label{fig: paused game}
+    \end{subfigure}
+    \hspace{1cm}
+    \begin{subfigure}[b]{0.35\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Figures/day_5/game_over.png}
+        \caption{Game over}
+        \label{fig: game over}
+    \end{subfigure}
+
+    \caption{A typical game of Tetris}
+    \label{fig: tetris}
+
+\end{figure}
