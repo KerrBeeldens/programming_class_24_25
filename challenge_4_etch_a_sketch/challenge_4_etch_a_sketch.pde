@@ -7,7 +7,7 @@ void setup() {
   size(1400, 1000);
 
   leftDial = new Dial(new PVector(150, height - 100), 50, 0, 240, 15f);
-  rightDial = new Dial(new PVector(width - 150, height - 100), 50, 0, 120, 15f);
+  rightDial = new Dial(new PVector(width - 150, height - 100), 50, 0, 140, 15f);
   canvas = new Canvas(new PVector(100, 100), 5, 240, 140, new PVector(0, 0));
 
   textFont(createFont("Clouts!.ttf", 85));
