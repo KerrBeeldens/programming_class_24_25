@@ -2,11 +2,6 @@ public class SpaceShip { //<>//
   private int health;
   private int maxHealth;
 
-  private float fuel;
-  private float maxFuel;
-
-  private int ammo;
-
   private PVector position;
   private float  speed;
 
@@ -14,21 +9,21 @@ public class SpaceShip { //<>//
   private float angularSpeed;
   private float hitboxSize;
 
-
   private IFireRate gun = new SingleFire();
 
-  public SpaceShip(int health, int maxHealth, float fuel, float maxFuel, int ammo, PVector position) {
+  private PImage[] spaceShipSprite;
+
+  public SpaceShip(int health, int maxHealth, PVector position) {
     this.health = health;
     this.maxHealth = maxHealth;
-    this.fuel = fuel;
-    this.maxFuel = maxFuel;
-    this.ammo = ammo;
     this.position = position;
 
     speed = 0;
     rotation = 0;
     angularSpeed = 0;
     hitboxSize = 50;
+
+    spaceShipSprite =  new PImage[] {loadImage("spaceShip_1.png"), loadImage("spaceShip_2.png"), loadImage("spaceShip_3.png"), loadImage("spaceShip_4.png")};
   }
 
   public void update() {
@@ -59,22 +54,19 @@ public class SpaceShip { //<>//
 
     speed *= 0.9725; // friction
     angularSpeed *= 0.9; // angular friction
-
-    // update the fuel
-    if (fuel > 0) {
-      fuel -= 0.01 * abs(speed);
-    }
   }
 
   public void render() {
-    circle(position.x, position.y, hitboxSize);
-    triangle(position.x - 10, position.y, position.x + 10, position.y, position.x + 40 * cos(rotation), position.y + 40 * sin(rotation));
+    imageMode(CENTER);
+    pushMatrix();
+    translate(position.x, position.y);
+    rotate(rotation + HALF_PI);
+    image(spaceShipSprite[(maxHealth - 1 - health) / 25], 0, 0, hitboxSize * 1.75, hitboxSize * 1.75);
+    popMatrix();
   }
 
   public void addSpeed(float speed) {
-    if (fuel > 0) {
-      this.speed += speed;
-    }
+    this.speed += speed;
   }
 
   public void setAngularSpeed(float angularSpeed) {
@@ -82,29 +74,11 @@ public class SpaceShip { //<>//
   }
 
   public ArrayList<Bullet> fire(PVector mousePosition) {
-    
-    ArrayList<Bullet> bullets = new ArrayList();
-
-    if (ammo <= 0) {
-      return bullets;
-    }
-
-    ammo -= 1;
 
     // The bulletDirection was created using chatGPT
     PVector bulletDirection = PVector.sub(mousePosition, position).normalize().mult(8); // scale it to desired speed
 
     return gun.fire(position.copy(), bulletDirection);
-  }
-
-
-  public void addAmmo(int amount) {
-    this.ammo += amount;
-  }
-
-  public void addFuel(float amount) {
-    float fuelTotal = this.fuel + amount;
-    this.fuel = fuelTotal > maxFuel ? maxFuel : fuelTotal;
   }
 
   public void addHealth(int amount) {
@@ -126,8 +100,8 @@ public class SpaceShip { //<>//
   public int getHealth() {
     return health;
   }
-  
+
   public int getMaxHealth() {
-   return maxHealth; 
+    return maxHealth;
   }
 }

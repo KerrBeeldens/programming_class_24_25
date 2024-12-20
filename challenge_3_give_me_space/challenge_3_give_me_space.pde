@@ -1,10 +1,6 @@
-
-int level = 1;
-
 SpaceShip player;
 ArrayList<Astroid> astroids = new ArrayList();
 ArrayList<Bullet> bullets = new ArrayList();
-
 
 boolean isUpPressed = false;
 boolean isLeftPressed = false;
@@ -12,21 +8,38 @@ boolean isRightPressed = false;
 
 GameState state = GameState.IN_MENU;
 
-void setup() {
-  size(1600, 1200);
+JSONObject data;
+int score = 0;
+int frameDelta = 0;
 
-  player = new SpaceShip(100, 100, 100, 100, 1000, new PVector(width/2, height / 2));
+PImage background;
+
+void setup() {
+  size(1400, 1000);
+  data = loadJSONObject("data/data.json");
+  background = loadImage("background.png");
+  player = new SpaceShip(100, 100, new PVector(width/2, height / 2));
+  textFont(createFont("Starjedi.ttf", 34));
+  noStroke();
 }
 
 void draw() {
 
-  if (state == GameState.IN_MENU) {
-    drawMenu();
-    return;
+  background(background);
+
+  for (Astroid astroid : astroids) {
+    astroid.render();
   }
 
   if (state == GameState.PAUSED) {
     drawPauseMenu();
+    return;
+  }
+
+  update();
+
+  if (state == GameState.IN_MENU) {
+    drawMenu();
     return;
   }
 
@@ -35,14 +48,7 @@ void draw() {
     return;
   }
 
-  update();
-
-  background(0);
   player.render();
-
-  for (Astroid astroid : astroids) {
-    astroid.render();
-  }
 
   // draw the bullets
   for (Bullet bullet : bullets) {
@@ -54,27 +60,52 @@ void draw() {
 
 void drawHUD() {
   textSize(24);
-  text("Health", 50, 68);
+  text("health:\n\nscore:  " + score, 50, 68);
+
 
   stroke(255);
   fill(0);
-  rect(125, 50, 200, 20);
+  rect(170, 50, 200, 20);
 
   fill(255);
-  rect(125, 50, 200 * player.getHealth() / player.getMaxHealth(), 20);
+  rect(170, 50, 200 * player.getHealth() / player.getMaxHealth(), 20);
 }
 
 void drawMenu() {
-}
-
-void drawPauseMenu() {
-  fill(255, 0, 0, 128);
+  fill(0, 0, 0, 128);
   rect(0, 0, width, height);
   fill(255);
 
   textSize(128);
   textAlign(CENTER);
-  text("Give Me\nS P A C E!", width/2, height/2);
+  text("give me\ns p a c e", width/2, height * 0.33);
+
+  textSize(64);
+  text("press 'space' to start", width/2, height * 0.55);
+  
+  textSize(36);
+  text("high score: " + data.getInt("highscore"), width/2, height * 0.65);
+
+  textSize(36);
+  text("controls:\nwasd - move\nmouse - aim\nleft Mouse - shoot", width/2, height * 0.75);
+  textAlign(LEFT);
+}
+
+void drawPauseMenu() {
+  fill(0, 0, 0, 128);
+  rect(0, 0, width, height);
+  fill(255);
+
+  textSize(128);
+  textAlign(CENTER);
+  text("give me\ns p a c e", width/2, height * 0.33);
+
+  textSize(64);
+  text("game paused", width/2, height * 0.55);
+
+  textSize(48);
+  text("Press 'space' to continue", width/2, height * 0.65);
+
   textAlign(LEFT);
 }
 
@@ -85,7 +116,13 @@ void drawGameOverMenu() {
 
   textSize(128);
   textAlign(CENTER);
-  text("Game Over!", width/2, height/2);
+  text("game over!", width/2, height * 0.33);
+  textSize(64);
+  text("Score: " + score, width/2, height * 0.55);
+
+  textSize(48);
+  text("Press 'space' to return to menu", width/2, height * 0.65);
+
   textAlign(LEFT);
 }
 
@@ -148,19 +185,17 @@ void update() {
     // should be removed if colided with spaceship
     if (astroidPosition.dist(player.getPosition()) < player.getHitboxSize() / 2 + astroid.getSize() / 2) {
       player.removeHealth(10);
-      print("hit! Health: ");
-      println(player.getHealth());
       astroidToRemove.add(astroids.get(i));
     }
 
     // astroid without health should be removed
-
     if (astroid.health <= 0) {
       astroidToRemove.add(astroids.get(i));
+      score += 100;
     }
 
     // should be removed if off screen
-    if (astroidPosition.y < -250 || astroidPosition.x > height + 250 || astroidPosition.y < -250 || astroidPosition.x > height + 250) {
+    if (astroidPosition.y < -250 || astroidPosition.y > height + 250 || astroidPosition.x < -250 || astroidPosition.x > width + 250) {
       astroidToRemove.add(astroids.get(i));
     }
   }
@@ -170,7 +205,11 @@ void update() {
 
   if (player.getHealth() <= 0) {
     state = GameState.GAME_OVER;
-    resetGame();
+  }
+
+  if ((frameCount - frameDelta) > frameRate * 2 && state == GameState.RUNNING) {
+    score += 150;
+    frameDelta = frameCount;
   }
 }
 
@@ -183,7 +222,7 @@ void generateAstroid() {
     return;
   }
 
-  int health = int(random(level, 3 + level));
+  int health = int(random(1, 3));
 
   PVector position = new PVector();
 
@@ -215,7 +254,7 @@ void generateAstroid() {
     }
   }
 
-  float size = random(10 + level * 10, 10 + level * 20);
+  float size = random(20, 50);
 
   PVector velocity = new PVector(random(-2, 2), random(-2, 2));
 
@@ -235,7 +274,17 @@ void keyPressed() {
     isRightPressed = true;
     break;
   case ' ': // space
-    state = (state == GameState.RUNNING) ? GameState.PAUSED : GameState.RUNNING;
+    if (state == GameState.RUNNING) {
+      state = GameState.PAUSED;
+    } else if (state == GameState.PAUSED) {
+      state = GameState.RUNNING;
+    } else if (state == GameState.IN_MENU) {
+      resetGame();
+      state = GameState.RUNNING;
+    } else if (state == GameState.GAME_OVER) {
+      state = GameState.IN_MENU;
+      resetGame();
+    }
   }
 }
 
@@ -262,13 +311,16 @@ void mousePressed() {
 }
 
 void resetGame() {
-  level = 1;
-
-  SpaceShip player;
   astroids = new ArrayList();
   bullets = new ArrayList();
 
-  player = new SpaceShip(100, 100, 100, 100, 1000, new PVector(width/2, height / 2));
+  player = new SpaceShip(100, 100, new PVector(width/2, height / 2));
+  
+  if (score > data.getInt("highscore")) {
+    data.setInt("highscore", score);
+    saveJSONObject(data, "data/data.json");
+  }
 
-  GameState state = GameState.IN_MENU;
+  score = 0;
+  frameDelta = frameCount;
 }
