@@ -10,3 +10,4 @@ It contains the following folders:
     - assignment 5: Tetris
 - The source code of the accompanying report (LaTeX). **N.B.** This document will not compile as it requires a custom LaTeX package and document class.
 - The compiled report (PDF).
+- A HTML file containing a detailed breakdown on the word count of the report.
