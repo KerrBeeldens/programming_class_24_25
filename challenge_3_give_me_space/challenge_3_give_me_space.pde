@@ -10,13 +10,31 @@ boolean isUpPressed = false;
 boolean isLeftPressed = false;
 boolean isRightPressed = false;
 
+GameState state = GameState.IN_MENU;
+
 void setup() {
   size(1600, 1200);
 
-  player = new SpaceShip(100, 100, 100, 100, 1000, new PVector(width/2, height * 0.95));
+  player = new SpaceShip(100, 100, 100, 100, 1000, new PVector(width/2, height / 2));
 }
 
 void draw() {
+
+  if (state == GameState.IN_MENU) {
+    drawMenu();
+    return;
+  }
+
+  if (state == GameState.PAUSED) {
+    drawPauseMenu();
+    return;
+  }
+
+  if (state == GameState.GAME_OVER) {
+    drawGameOverMenu();
+    return;
+  }
+
   update();
 
   background(0);
@@ -37,13 +55,38 @@ void draw() {
 void drawHUD() {
   textSize(24);
   text("Health", 50, 68);
-  
+
   stroke(255);
   fill(0);
   rect(125, 50, 200, 20);
-  
+
   fill(255);
   rect(125, 50, 200 * player.getHealth() / player.getMaxHealth(), 20);
+}
+
+void drawMenu() {
+}
+
+void drawPauseMenu() {
+  fill(255, 0, 0, 128);
+  rect(0, 0, width, height);
+  fill(255);
+
+  textSize(128);
+  textAlign(CENTER);
+  text("Give Me\nS P A C E!", width/2, height/2);
+  textAlign(LEFT);
+}
+
+void drawGameOverMenu() {
+  fill(255, 0, 0, 128);
+  rect(0, 0, width, height);
+  fill(255);
+
+  textSize(128);
+  textAlign(CENTER);
+  text("Game Over!", width/2, height/2);
+  textAlign(LEFT);
 }
 
 void update() {
@@ -124,6 +167,11 @@ void update() {
 
   // remove the marked astroids
   astroids.removeAll(astroidToRemove);
+
+  if (player.getHealth() <= 0) {
+    state = GameState.GAME_OVER;
+    resetGame();
+  }
 }
 
 
@@ -186,6 +234,8 @@ void keyPressed() {
   case 'd':
     isRightPressed = true;
     break;
+  case ' ': // space
+    state = (state == GameState.RUNNING) ? GameState.PAUSED : GameState.RUNNING;
   }
 }
 
@@ -209,4 +259,16 @@ void mousePressed() {
   int y = mouseY;
 
   bullets.addAll(player.fire(new PVector(x, y)));
+}
+
+void resetGame() {
+  level = 1;
+
+  SpaceShip player;
+  astroids = new ArrayList();
+  bullets = new ArrayList();
+
+  player = new SpaceShip(100, 100, 100, 100, 1000, new PVector(width/2, height / 2));
+
+  GameState state = GameState.IN_MENU;
 }
