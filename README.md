@@ -4,7 +4,7 @@ It contains the following folders:
 
 - The source code of the 5 assignments, separated into folders:
     - assignment 1: Half-tone
-    - assignment 2: day-night cycle
+    - assignment 2: Growth
     - assignment 3: Give Me Space
     - assignment 4: Etch-a-sketch
     - assignment 5: Tetris

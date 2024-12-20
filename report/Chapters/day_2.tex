@@ -40,5 +40,55 @@ if (relational expression) {
 Two unrelated topics that where briefly mentioned today where those of indentation and the mouse location. Indentation is the convention to offset lines within blocks with a tab to the right. This makes your program easier to read. The location of the mouse is stored in the variables \texttt{mouseX} and \texttt{mouseY}.
 
 
-\section{Challenge description: \textcolor{red}{name}}
+\section{Challenge description: Growth}
 % A description of that day’s challenge describing what the assignment was, what you tried to achieve and how you applied the topics from the “listen” segment. include instruction on how to use is and Include screenshots/screen captures. (150 – 250 words)
+
+The goal of the challenge was to create an animation using the \texttt{setup()} and \texttt{draw()} methods. I created a short animation called \textit{Growth}, which shows a sunflower growing. It symbolises the learning process while programming, starting from a seed and ending in a flower.
+
+\medskip
+
+The different stages of the animation are shown in \cref{fig: animation}. First, the stem of the flower is growing as shown in \cref{fig: animation stage 1}. Then, leafs start to form as the stem grows taller (\cref{fig: animation stage 2}). Then, the start of the sunflower is made, which has a happy face as seen in \cref{fig: animation stage 3}. Finally, the pedals of the sunflower start to form in \cref{fig: animation stage 4}. After the animation has completed, the sunflower continuously waves (not shown).
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[t]{.35\textwidth}
+        \centering
+
+        \includegraphics[width=\linewidth]{Figures/day_2/stage_1.png}
+        \caption{Stage 1: starting the stem}
+        \label{fig: animation stage 1}
+
+    \end{subfigure}
+    \hspace{1cm}
+    \begin{subfigure}[t]{.35\textwidth}
+        \centering
+
+        \includegraphics[width=\linewidth]{Figures/day_2/stage_2.png}
+        \caption{Stage 2: Growing leafs}
+        \label{fig: animation stage 2}
+
+    \end{subfigure}
+    \begin{subfigure}[t]{.35\textwidth}
+        \centering
+
+        \includegraphics[width=\linewidth]{Figures/day_2/stage_3.png}
+        \caption{Stage 3: starting the flower}
+        \label{fig: animation stage 3}
+
+    \end{subfigure}
+    \hspace{1cm}
+    \begin{subfigure}[t]{.35\textwidth}
+        \centering
+
+        \includegraphics[width=\linewidth]{Figures/day_2/stage_4.png}
+        \caption{Stage 4: Growing pedals}
+        \label{fig: animation stage 4}
+
+    \end{subfigure}
+
+    \caption{Four stages of the animation}
+    \label{fig: animation}
+
+\end{figure}
+
+To create the animation the \texttt{setup()} method is used to set the framerate and size of the window. Then, the animation is created in the \texttt{draw()} method. If-statements are mostly used to create `keyframes', by only starting drawing part of a flower after a certain number of frames using \texttt{frameCount}. From here, most animation use \texttt{min()} and \texttt{max()} (often together) to specify when the animation should happen and how long it should take.
